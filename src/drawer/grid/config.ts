@@ -7,4 +7,7 @@ export const config = {
     size: 20,
     color: "#000000",
   },
+  backdrop: {
+    color: "#ffffff",
+  },
 };

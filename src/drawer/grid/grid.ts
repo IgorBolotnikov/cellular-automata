@@ -7,6 +7,7 @@ export function drawGrid(ctx: Ctx): void {
   const maxWidth = ctx.canvas.width;
   const maxHeight = ctx.canvas.height;
   const step = getStepSize();
+  drawBackdrop(ctx);
   for (let x = step; x <= maxWidth; x += step) {
     drawVerticalLine(ctx, x, maxHeight);
   }
@@ -31,4 +32,10 @@ function drawHorizontalLines(ctx: Ctx, yCoord: number, width: number): void {
   ctx.lineTo(width, yCoord);
   ctx.strokeStyle = config.line.color;
   ctx.stroke();
+}
+
+function drawBackdrop(ctx: Ctx): void {
+  ctx.fillStyle = config.backdrop.color;
+  ctx.rect(0, 0, ctx.canvas.width, ctx.canvas.height);
+  ctx.fill();
 }

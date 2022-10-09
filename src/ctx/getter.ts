@@ -23,7 +23,7 @@ export function getCtx(doc: Document, contextId = "2d"): RenderingContext {
   if (!isCanvas(canvas)) {
     throw new Error('Element with id "canvas" is not a canvas');
   }
-  const ctx = canvas.getContext(contextId);
+  const ctx = canvas.getContext(contextId, { alpha: false });
   if (!ctx) {
     throw new Error("canvas does not have context");
   }
