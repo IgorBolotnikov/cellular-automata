@@ -1,3 +1,5 @@
+import { config } from "./config";
+
 interface IMatrix {
   readonly rows: number;
   readonly cols: number;
@@ -8,6 +10,8 @@ interface IMatrix {
   clearCell(xCoord: number, yCoord: number): void;
 
   isCellFilled(xCoord: number, yCoord: number): boolean;
+
+  fillRandom(): void;
 }
 
 class Matrix implements IMatrix {
@@ -67,6 +71,14 @@ class Matrix implements IMatrix {
     return this.matrix[xCoord][yCoord] === this.filledCell;
   }
 
+  fillRandom(): void {
+    for (let row = 0; row < this._rows; row++) {
+      for (let col = 0; col < this._cols; col++) {
+        this.matrix[row][col] = this.randomCellValue();
+      }
+    }
+  }
+
   private areValidCoords(xCoord: number, yCoord: number): boolean {
     try {
       return typeof this.matrix[xCoord][yCoord] === "number";
@@ -74,10 +86,16 @@ class Matrix implements IMatrix {
       return false;
     }
   }
+
+  private randomCellValue(): number {
+    return Math.random() >= config.cellFilledBias
+      ? this.filledCell
+      : this.emptyCell;
+  }
 }
 
 /**
- * Get a Matrix instance of a certain dimensions.
+ * Get a Matrix instance of a certain dimensions filled with empty cells.
  *
  * Matrix indices are 0-based.
  *
@@ -96,4 +114,19 @@ export function getMatrixFromDims(rows: number, cols: number): IMatrix {
 
 export function getMatrixFrom2DArray(from2DArr: number[][]): IMatrix {
   return Matrix.from2DArray(from2DArr);
+}
+
+/**
+ * Get a Matrix instance of a certain dimensions filled with randomly filled cells.
+ *
+ * Matrix indices are 0-based.
+ *
+ * @param rows number of rows
+ * @param cols number of columns
+ */
+
+export function randomMatrixFromDims(rows: number, cols: number): IMatrix {
+  const matrix = Matrix.fromDimensions(rows, cols);
+  matrix.fillRandom();
+  return matrix;
 }

@@ -1,4 +1,8 @@
-import { getMatrixFrom2DArray, getMatrixFromDims } from "../matrix";
+import {
+  getMatrixFrom2DArray,
+  getMatrixFromDims,
+  randomMatrixFromDims,
+} from "../matrix";
 
 describe("getMatrixFromDims", () => {
   it("should return a matrix object of specified dimensions", () => {
@@ -104,5 +108,13 @@ describe("getMatrixFrom2DArray", () => {
   it("should return false when checking non-existent cell", () => {
     const matrix = getMatrixFrom2DArray([[1]]);
     expect(matrix.isCellFilled(3, 3)).toEqual(false);
+  });
+});
+
+describe("randomMatrixFromDims", () => {
+  it("should create a matrix with random cells", () => {
+    const matrix1 = randomMatrixFromDims(2, 2);
+    const matrix2 = randomMatrixFromDims(2, 2);
+    expect(matrix1).not.toEqual(matrix2);
   });
 });
