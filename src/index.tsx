@@ -1,7 +1,7 @@
 /** @jsx h */
-import { VNode, h } from 'preact';
-import { useCallback, useEffect, useRef } from 'preact/hooks';
-import './style.css';
+import { VNode, h } from "preact";
+import { useCallback, useEffect, useRef } from "preact/hooks";
+import "./style.css";
 
 export default function App(): VNode {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -15,17 +15,19 @@ export default function App(): VNode {
   }, []);
 
   useEffect(() => {
-    window.addEventListener('resize', resizeCanvas);
+    window.addEventListener("resize", resizeCanvas);
     return () => {
-      window.removeEventListener('resize', resizeCanvas);
+      window.removeEventListener("resize", resizeCanvas);
     };
   }, [resizeCanvas]);
 
-  return <canvas
-    ref={canvasRef}
-    id="canvas"
-    data-testid="canvas"
-    width={window.innerWidth}
-    height={window.innerHeight}
-  />;
+  return (
+    <canvas
+      ref={canvasRef}
+      id="canvas"
+      data-testid="canvas"
+      width={window.innerWidth}
+      height={window.innerHeight}
+    />
+  );
 }
