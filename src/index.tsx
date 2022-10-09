@@ -1,6 +1,7 @@
 /** @jsx h */
 import { VNode, h } from "preact";
 import { useCallback, useEffect, useRef } from "preact/hooks";
+import { drawCell } from './drawer/grid';
 import { draw } from "./drawer/draw";
 import "./style.css";
 
@@ -14,6 +15,10 @@ export default function App(): VNode {
       canvasRef.current.height = window.innerHeight;
       draw(document);
     }
+  }, []);
+
+  const handleClick = useCallback((event: MouseEvent) => {
+    drawCell(document, event.offsetX, event.offsetY);
   }, []);
 
   useEffect(() => {
@@ -32,6 +37,7 @@ export default function App(): VNode {
       data-testid="canvas"
       width={window.innerWidth}
       height={window.innerHeight}
+      onClick={handleClick}
     />
   );
 }

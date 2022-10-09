@@ -1,18 +1,12 @@
-type Ctx = CanvasRenderingContext2D;
+import { getStepSize } from './step';
+import { config } from './config';
 
-const config = {
-  line: {
-    width: 1,
-    // color: '#444444',
-    color: "#000000",
-  },
-  cellSize: 39,
-};
+type Ctx = CanvasRenderingContext2D;
 
 export function drawGrid(ctx: Ctx): void {
   const maxWidth = ctx.canvas.width;
   const maxHeight = ctx.canvas.height;
-  const step = config.cellSize + config.line.width;
+  const step = getStepSize();
   for (let x = step; x <= maxWidth; x += step) {
     drawVerticalLine(ctx, x, maxHeight);
   }
