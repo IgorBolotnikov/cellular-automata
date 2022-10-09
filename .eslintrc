@@ -1,16 +1,58 @@
 {
   "root": true,
   "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": ["./tsconfig.json"]
+  },
   "plugins": [
+    "jest",
     "@typescript-eslint"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "**/__tests__/**"
+      ],
+      "plugins": [
+        "jest"
+      ],
+      "extends": [
+        "plugin:jest/recommended"
+      ],
+      "rules": {
+        "jest/prefer-expect-assertions": "off",
+        "jest/no-disabled-tests": "warn",
+        "jest/no-focused-tests": "error",
+        "jest/no-identical-title": "error",
+        "jest/prefer-to-have-length": "warn",
+        "jest/valid-expect": "error",
+        "jest/consistent-test-it": "warn"
+      }
+    }
   ],
   "extends": [
     "preact",
+    "prettier",
     "eslint:recommended",
-    "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "plugin:@typescript-eslint/strict"
   ],
   "ignorePatterns": [
     "build/"
-  ]
+  ],
+  "settings": {
+    "react": {
+      "pragma": "h"
+    }
+  },
+  "rules": {
+    "curly": "error",
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      {
+        "varsIgnorePattern": "^h$"
+      }
+    ]
+  }
 }
