@@ -1,9 +1,10 @@
 /** @jsx h */
 import { VNode, h } from "preact";
 import { useCallback, useEffect, useRef } from "preact/hooks";
-import { drawCell } from "./drawer/grid";
-import { draw } from "./drawer/draw";
+import { drawCell, getGridSize } from "./drawer/grid";
+import { draw, drawFromMatrix } from "./drawer/draw";
 import "./style.css";
+import { randomMatrixFromDims } from "./matrix";
 
 export default function App(): VNode {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -28,7 +29,12 @@ export default function App(): VNode {
     };
   }, [resizeCanvas]);
 
-  useEffect(() => draw(document), []);
+  useEffect(() => {
+    const [rows, cols] = getGridSize(document);
+    const matrix = randomMatrixFromDims(rows, cols);
+    draw(document);
+    drawFromMatrix(document, matrix);
+  }, []);
 
   return (
     <canvas

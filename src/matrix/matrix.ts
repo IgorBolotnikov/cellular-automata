@@ -83,7 +83,7 @@ class Matrix implements IMatrix {
   }
 
   private randomCellValue(): number {
-    return Math.random() >= config.cellFilledBias
+    return Math.random() < config.cellFilledBias
       ? this.filledCell
       : this.emptyCell;
   }

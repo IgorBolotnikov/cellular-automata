@@ -1,4 +1,4 @@
-import { drawCellByIndices } from "src/drawer/grid/cell";
+import { drawCellByIndices } from "./grid/cell";
 import { getCtx } from "../ctx/getter";
 import { IMatrix } from "../matrix";
 import { adjustScale } from "./scale";
@@ -13,8 +13,6 @@ export function draw(document: Document): void {
 }
 
 export function drawFromMatrix(document: Document, matrix: IMatrix): void {
-  const ctx = getCtx(document);
-  adjustScale(ctx);
   for (const [row, col] of matrix.indices()) {
     if (matrix.isCellFilled(row, col)) {
       drawCellByIndices(document, row, col);
