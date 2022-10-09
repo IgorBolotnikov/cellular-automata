@@ -1,18 +1,5 @@
 import { config } from "./config";
-
-interface IMatrix {
-  readonly rows: number;
-  readonly cols: number;
-  readonly size: number;
-
-  fillCell(xCoord: number, yCoord: number): void;
-
-  clearCell(xCoord: number, yCoord: number): void;
-
-  isCellFilled(xCoord: number, yCoord: number): boolean;
-
-  fillRandom(): void;
-}
+import type { IMatrix } from "./types";
 
 class Matrix implements IMatrix {
   private _rows!: number;
@@ -75,6 +62,14 @@ class Matrix implements IMatrix {
     for (let row = 0; row < this._rows; row++) {
       for (let col = 0; col < this._cols; col++) {
         this.matrix[row][col] = this.randomCellValue();
+      }
+    }
+  }
+
+  *indices(): Iterable<[number, number]> {
+    for (let row = 0; row < this._rows; row++) {
+      for (let col = 0; col < this._cols; col++) {
+        yield [row, col];
       }
     }
   }

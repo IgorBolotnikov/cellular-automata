@@ -46,6 +46,14 @@ describe("getMatrixFromDims", () => {
     matrix.fillCell(0, 0);
     expect(matrix.isCellFilled(3, 3)).toEqual(false);
   });
+
+  it("should allow iteration over indices", () => {
+    const matrix = getMatrixFromDims(3, 4);
+    const indices = [...matrix.indices()];
+    expect(indices).toHaveLength(3 * 4);
+    expect(indices[0]).toEqual([0, 0]);
+    expect(indices[indices.length - 1]).toEqual([2, 3]);
+  });
 });
 
 describe("getMatrixFrom2DArray", () => {

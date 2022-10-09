@@ -7,11 +7,18 @@ export function drawCell(
   xCoord: number,
   yCoord: number
 ): void {
-  const ctx = getCtx(document);
-  ctx.fillStyle = config.cell.color;
   const [closestX, closestY] = closestCellCoords(xCoord, yCoord);
-  ctx.rect(closestX, closestY, config.cell.size, config.cell.size);
-  ctx.fill();
+  drawCellByCoords(document, closestX, closestY);
+}
+
+export function drawCellByIndices(
+  document: Document,
+  row: number,
+  column: number
+): void {
+  const xCoord = row * config.cell.size;
+  const yCoord = column * config.cell.size;
+  drawCellByCoords(document, xCoord, yCoord);
 }
 
 function closestCellCoords(xCoord: number, yCoord: number): [number, number] {
@@ -19,4 +26,15 @@ function closestCellCoords(xCoord: number, yCoord: number): [number, number] {
   const closestX = xCoord - (xCoord % step);
   const closestY = yCoord - (yCoord % step);
   return [closestX, closestY];
+}
+
+function drawCellByCoords(
+  document: Document,
+  xCoord: number,
+  yCoord: number
+): void {
+  const ctx = getCtx(document);
+  ctx.fillStyle = config.cell.color;
+  ctx.rect(xCoord, yCoord, config.cell.size, config.cell.size);
+  ctx.fill();
 }
