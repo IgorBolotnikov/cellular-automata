@@ -64,11 +64,11 @@ describe('App', () => {
     const draw = jest.spyOn(drawer, 'draw');
     draw.mockReset();
     void act(() => {
-      fireEvent.keyPress(window, { key: 'Enter', code: 'Enter' });
+      fireEvent.keyPress(window, { key: '\n', code: 'Enter' });
     });
     expect(draw).not.toHaveBeenCalled();
     void act(() => {
-      fireEvent.keyPress(window, { key: 'Space', code: 'Space' });
+      fireEvent.keyPress(window, { key: ' ', code: 'Space' });
     });
     expect(draw).toHaveBeenCalled();
   });

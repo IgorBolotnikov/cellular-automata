@@ -29,12 +29,16 @@ export default function App(): VNode {
     drawCell(document, event.offsetX, event.offsetY);
   }, []);
 
-  const handleKeyPress = useCallback((event: KeyboardEvent) => {
-    if (event.key !== 'Space') {
-      return;
-    }
-    drawRandomGrid();
-  }, [drawRandomGrid]);
+  const handleKeyPress = useCallback(
+    (event: KeyboardEvent) => {
+      if (event.code !== 'Space') {
+        return;
+      }
+      event.preventDefault();
+      drawRandomGrid();
+    },
+    [drawRandomGrid]
+  );
 
   useEffect(() => {
     window.addEventListener('resize', resizeCanvas);
