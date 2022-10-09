@@ -1,6 +1,7 @@
 /** @jsx h */
 import { VNode, h } from "preact";
 import { useCallback, useEffect, useRef } from "preact/hooks";
+import { draw } from "./drawer/draw";
 import "./style.css";
 
 export default function App(): VNode {
@@ -11,6 +12,7 @@ export default function App(): VNode {
     if (canvasRef.current) {
       canvasRef.current.width = window.innerWidth;
       canvasRef.current.height = window.innerHeight;
+      draw(document);
     }
   }, []);
 
@@ -20,6 +22,8 @@ export default function App(): VNode {
       window.removeEventListener("resize", resizeCanvas);
     };
   }, [resizeCanvas]);
+
+  useEffect(() => draw(document), []);
 
   return (
     <canvas
