@@ -1,5 +1,6 @@
 module.exports = {
   preset: 'jest-preset-preact',
+  'setupFiles': ['jest-canvas-mock'],
   moduleNameMapper: {
     '^src(.*)$': '<rootDir>/src$1'
   },
