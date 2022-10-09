@@ -4,7 +4,7 @@ const config = {
   line: {
     width: 1,
     // color: '#444444',
-    color: '#000000',
+    color: "#000000",
   },
   cellSize: 39,
 };

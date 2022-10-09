@@ -7,7 +7,7 @@
 import { h } from "preact";
 import { act, render, screen } from "@testing-library/preact";
 import App from "src/index";
-import * as drawer from 'src/drawer/draw';
+import * as drawer from "src/drawer/draw";
 
 function resizeWindow(width: number, height: number): void {
   window.innerWidth = width;
@@ -38,7 +38,7 @@ describe("App", () => {
   });
 
   it("should draw on canvas", () => {
-    const draw = jest.spyOn(drawer, 'draw');
+    const draw = jest.spyOn(drawer, "draw");
     void act(() => {
       render(<App />);
     });
