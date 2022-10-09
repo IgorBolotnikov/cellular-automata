@@ -33,8 +33,10 @@ function drawCellByCoords(
   xCoord: number,
   yCoord: number
 ): void {
-  const ctx = getCtx(document);
-  ctx.fillStyle = config.cell.color;
-  ctx.rect(xCoord, yCoord, config.cell.size, config.cell.size);
-  ctx.fill();
+  requestAnimationFrame(() => {
+    const ctx = getCtx(document);
+    ctx.fillStyle = config.cell.color;
+    ctx.rect(xCoord, yCoord, config.cell.size, config.cell.size);
+    ctx.fill();
+  });
 }
