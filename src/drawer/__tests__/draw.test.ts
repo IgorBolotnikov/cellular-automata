@@ -1,19 +1,19 @@
 /**
  * @jest-environment jsdom
  */
-import { render } from "@testing-library/preact";
-import { h } from "preact";
-import { drawFromMatrix } from "src/drawer/draw";
-import { getMatrixFrom2DArray } from "src/matrix";
-import * as cell from "../grid/cell";
+import { render } from '@testing-library/preact';
+import { h } from 'preact';
+import { drawFromMatrix } from 'src/drawer/draw';
+import { getMatrixFrom2DArray } from 'src/matrix';
+import * as cell from '../grid/cell';
 
-describe("drawFromMatrix", () => {
+describe('drawFromMatrix', () => {
   beforeEach(() => {
-    render(h("canvas", { id: "canvas" }));
+    render(h('canvas', { id: 'canvas' }));
   });
 
-  it("should draw cells for every filled matrix cell", () => {
-    const spied = jest.spyOn(cell, "drawCellByIndices");
+  it('should draw cells for every filled matrix cell', () => {
+    const spied = jest.spyOn(cell, 'drawCellByIndices');
     const matrix = getMatrixFrom2DArray([
       [1, 0],
       [0, 1],

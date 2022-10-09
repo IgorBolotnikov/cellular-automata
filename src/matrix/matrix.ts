@@ -1,5 +1,5 @@
-import { config } from "./config";
-import type { IMatrix } from "./types";
+import { config } from './config';
+import type { IMatrix } from './types';
 
 class Matrix implements IMatrix {
   private _rows!: number;
@@ -76,7 +76,7 @@ class Matrix implements IMatrix {
 
   private areValidCoords(xCoord: number, yCoord: number): boolean {
     try {
-      return typeof this.matrix[xCoord][yCoord] === "number";
+      return typeof this.matrix[xCoord][yCoord] === 'number';
     } catch {
       return false;
     }

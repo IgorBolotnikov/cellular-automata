@@ -1,5 +1,5 @@
-import { getStepSize } from "./step";
-import { config } from "./config";
+import { getStepSize } from './step';
+import { config } from './config';
 
 type Ctx = CanvasRenderingContext2D;
 

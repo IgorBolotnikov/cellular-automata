@@ -1,5 +1,5 @@
-import { getCtx } from "../../ctx/getter";
-import { config } from "./config";
+import { getCtx } from '../../ctx/getter';
+import { config } from './config';
 
 export function getGridSize(document: Document): [number, number] {
   const ctx = getCtx(document);

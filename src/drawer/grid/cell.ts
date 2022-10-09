@@ -1,6 +1,6 @@
-import { getCtx } from "../../ctx/getter";
-import { getStepSize } from "./step";
-import { config } from "./config";
+import { getCtx } from '../../ctx/getter';
+import { getStepSize } from './step';
+import { config } from './config';
 
 export function drawCell(
   document: Document,

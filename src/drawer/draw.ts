@@ -1,8 +1,8 @@
-import { drawCellByIndices } from "./grid/cell";
-import { getCtx } from "../ctx/getter";
-import { IMatrix } from "../matrix";
-import { adjustScale } from "./scale";
-import { drawGrid } from "./grid";
+import { drawCellByIndices } from './grid/cell';
+import { getCtx } from '../ctx/getter';
+import { IMatrix } from '../matrix';
+import { adjustScale } from './scale';
+import { drawGrid } from './grid';
 
 const drawers: ((ctx: CanvasRenderingContext2D) => void)[] = [drawGrid];
 

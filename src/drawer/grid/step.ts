@@ -1,4 +1,4 @@
-import { config } from "./config";
+import { config } from './config';
 
 export function getStepSize(): number {
   return config.cell.size;
