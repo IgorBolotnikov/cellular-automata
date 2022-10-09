@@ -9,6 +9,13 @@ import { randomMatrixFromDims } from './matrix';
 export default function App(): VNode {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
+  const drawRandomGrid = useCallback(() => {
+    const [rows, cols] = getGridSize(document);
+    const matrix = randomMatrixFromDims(rows, cols);
+    draw(document);
+    drawFromMatrix(document, matrix);
+  }, []);
+
   const resizeCanvas = useCallback(() => {
     /* istanbul ignore next */
     if (canvasRef.current) {
@@ -22,19 +29,25 @@ export default function App(): VNode {
     drawCell(document, event.offsetX, event.offsetY);
   }, []);
 
-  useEffect(() => {
-    window.addEventListener('resize', resizeCanvas);
-    return () => {
-      window.removeEventListener('resize', resizeCanvas);
-    };
-  }, [resizeCanvas]);
+  const handleKeyPress = useCallback((event: KeyboardEvent) => {
+    if (event.key !== 'Space') {
+      return;
+    }
+    drawRandomGrid();
+  }, [drawRandomGrid]);
 
   useEffect(() => {
-    const [rows, cols] = getGridSize(document);
-    const matrix = randomMatrixFromDims(rows, cols);
-    draw(document);
-    drawFromMatrix(document, matrix);
-  }, []);
+    window.addEventListener('resize', resizeCanvas);
+    window.addEventListener('keypress', handleKeyPress);
+    return () => {
+      window.removeEventListener('resize', resizeCanvas);
+      window.removeEventListener('keypress', handleKeyPress);
+    };
+  }, [handleKeyPress, resizeCanvas]);
+
+  useEffect(() => {
+    drawRandomGrid();
+  }, [drawRandomGrid]);
 
   return (
     <canvas

@@ -47,13 +47,29 @@ describe('App', () => {
   });
 
   it('should draw a cell when clicking on canvas', () => {
-    const drawCell = jest.spyOn(cell, 'drawCell');
     void act(() => {
       render(<App />);
     });
+    const drawCell = jest.spyOn(cell, 'drawCell');
     void act(() => {
       fireEvent.click(screen.getByTestId('canvas'));
     });
     expect(drawCell).toHaveBeenCalled();
+  });
+
+  it('should redraw grid when pressing Space button', () => {
+    void act(() => {
+      render(<App />);
+    });
+    const draw = jest.spyOn(drawer, 'draw');
+    draw.mockReset();
+    void act(() => {
+      fireEvent.keyPress(window, { key: 'Enter', code: 'Enter' });
+    });
+    expect(draw).not.toHaveBeenCalled();
+    void act(() => {
+      fireEvent.keyPress(window, { key: 'Space', code: 'Space' });
+    });
+    expect(draw).toHaveBeenCalled();
   });
 });
