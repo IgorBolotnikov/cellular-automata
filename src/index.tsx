@@ -1,7 +1,7 @@
 /** @jsx h */
 import { VNode, h } from "preact";
 import { useCallback, useEffect, useRef } from "preact/hooks";
-import { drawCell } from './drawer/grid';
+import { drawCell } from "./drawer/grid";
 import { draw } from "./drawer/draw";
 import "./style.css";
 

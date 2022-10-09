@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "license": "MIT",
   "scripts": {
-    "cs": "npx prettier src",
+    "cs": "npx prettier --check src",
     "cs:fix": "npx prettier --write src",
     "lint": "eslint src --max-warnings=0",
     "lint:fix": "eslint src --fix --max-warnings=0",

@@ -1,2 +1,2 @@
 export { drawGrid } from "./grid";
-export { drawCell } from './cell';
+export { drawCell } from "./cell";
