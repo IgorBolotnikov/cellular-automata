@@ -19,7 +19,7 @@ describe('drawFromMatrix', () => {
       [0, 1],
     ]);
     drawFromMatrix(document, matrix);
-    expect(spied).toHaveBeenNthCalledWith(1, 0, 0);
-    expect(spied).toHaveBeenNthCalledWith(2, 1, 1);
+    expect(spied).toHaveBeenNthCalledWith(1, document, 0, 0);
+    expect(spied).toHaveBeenNthCalledWith(2, document, 1, 1);
   });
 });
