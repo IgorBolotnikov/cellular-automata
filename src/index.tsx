@@ -1,19 +1,23 @@
 /** @jsx h */
 import { VNode, h } from 'preact';
 import { useCallback, useEffect, useRef } from 'preact/hooks';
+import { adjustScale } from './drawer/scale';
 import { drawCell, getGridSize } from './drawer/grid';
 import { draw, drawFromMatrix } from './drawer/draw';
 import './style.css';
 import { randomMatrixFromDims } from './matrix';
+import { getCtx } from './ctx/getter';
 
 export default function App(): VNode {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const drawRandomGrid = useCallback(() => {
-    const [rows, cols] = getGridSize(document);
-    const matrix = randomMatrixFromDims(rows, cols);
-    draw(document);
-    drawFromMatrix(document, matrix);
+    requestAnimationFrame(() => {
+      const [rows, cols] = getGridSize(document);
+      const matrix = randomMatrixFromDims(rows, cols);
+      draw(document);
+      drawFromMatrix(document, matrix);
+    });
   }, []);
 
   const resizeCanvas = useCallback(() => {
@@ -50,6 +54,7 @@ export default function App(): VNode {
   }, [handleKeyPress, resizeCanvas]);
 
   useEffect(() => {
+    adjustScale(getCtx(document));
     drawRandomGrid();
   }, [drawRandomGrid]);
 

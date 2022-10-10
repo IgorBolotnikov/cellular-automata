@@ -121,8 +121,8 @@ describe('getMatrixFrom2DArray', () => {
 
 describe('randomMatrixFromDims', () => {
   it('should create a matrix with random cells', () => {
-    const matrix1 = randomMatrixFromDims(2, 2);
-    const matrix2 = randomMatrixFromDims(2, 2);
+    const matrix1 = randomMatrixFromDims(5, 5);
+    const matrix2 = randomMatrixFromDims(5, 5);
     expect(matrix1).not.toEqual(matrix2);
   });
 });

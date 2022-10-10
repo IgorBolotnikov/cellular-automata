@@ -17,31 +17,25 @@ export function drawGrid(ctx: Ctx): void {
 }
 
 function drawVerticalLine(ctx: Ctx, xCoord: number, height: number): void {
-  requestAnimationFrame(() => {
-    ctx.beginPath();
-    ctx.moveTo(xCoord, 0);
-    ctx.lineWidth = config.line.width;
-    ctx.lineTo(xCoord, height);
-    ctx.strokeStyle = config.line.color;
-    ctx.stroke();
-  });
+  ctx.beginPath();
+  ctx.moveTo(xCoord, 0);
+  ctx.lineWidth = config.line.width;
+  ctx.lineTo(xCoord, height);
+  ctx.strokeStyle = config.line.color;
+  ctx.stroke();
 }
 
 function drawHorizontalLines(ctx: Ctx, yCoord: number, width: number): void {
-  requestAnimationFrame(() => {
-    ctx.beginPath();
-    ctx.moveTo(0, yCoord);
-    ctx.lineWidth = config.line.width;
-    ctx.lineTo(width, yCoord);
-    ctx.strokeStyle = config.line.color;
-    ctx.stroke();
-  });
+  ctx.beginPath();
+  ctx.moveTo(0, yCoord);
+  ctx.lineWidth = config.line.width;
+  ctx.lineTo(width, yCoord);
+  ctx.strokeStyle = config.line.color;
+  ctx.stroke();
 }
 
 function drawBackdrop(ctx: Ctx): void {
-  requestAnimationFrame(() => {
-    ctx.fillStyle = config.backdrop.color;
-    ctx.rect(0, 0, ctx.canvas.width, ctx.canvas.height);
-    ctx.fill();
-  });
+  ctx.fillStyle = config.backdrop.color;
+  ctx.rect(0, 0, ctx.canvas.width, ctx.canvas.height);
+  ctx.fill();
 }

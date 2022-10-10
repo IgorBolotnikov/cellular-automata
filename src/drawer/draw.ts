@@ -1,14 +1,13 @@
 import { drawCellByIndices } from './grid/cell';
 import { getCtx } from '../ctx/getter';
 import { IMatrix } from '../matrix';
-import { adjustScale } from './scale';
 import { drawGrid } from './grid';
 
 const drawers: ((ctx: CanvasRenderingContext2D) => void)[] = [drawGrid];
 
 export function draw(document: Document): void {
   const ctx = getCtx(document);
-  adjustScale(ctx);
+  ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
   drawers.forEach((drawer) => drawer(ctx));
 }
 

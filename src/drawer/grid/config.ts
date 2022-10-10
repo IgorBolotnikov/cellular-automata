@@ -4,7 +4,7 @@ export const config = {
     color: '#b2b2b2',
   },
   cell: {
-    size: 20,
+    size: 40,
     color: '#000000',
   },
   backdrop: {
