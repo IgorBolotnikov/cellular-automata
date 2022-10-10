@@ -1,6 +1,6 @@
 export function adjustScale(ctx: CanvasRenderingContext2D): void {
-  const width = ctx.canvas.width;
-  const height = ctx.canvas.height;
+  const width = window.innerWidth;
+  const height = window.innerHeight;
   ctx.canvas.style.width = `${width}px`;
   ctx.canvas.style.height = `${height}px`;
   const scale = window.devicePixelRatio;

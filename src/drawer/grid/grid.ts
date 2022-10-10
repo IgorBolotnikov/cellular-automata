@@ -36,6 +36,7 @@ function drawHorizontalLines(ctx: Ctx, yCoord: number, width: number): void {
 
 function drawBackdrop(ctx: Ctx): void {
   ctx.fillStyle = config.backdrop.color;
+  ctx.beginPath();
   ctx.rect(0, 0, ctx.canvas.width, ctx.canvas.height);
   ctx.fill();
 }

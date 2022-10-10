@@ -23,6 +23,6 @@ describe('Context getter', () => {
 
   it('should raise error when canvas has other than 2d context', () => {
     render(h('canvas', { id: 'canvas' }));
-    expect(() => getCtx(document, 'invalid')).toThrow(Error);
+    expect(() => getCtx(document, 'canvas', 'invalid')).toThrow(Error);
   });
 });

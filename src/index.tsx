@@ -3,34 +3,41 @@ import { VNode, h } from 'preact';
 import { useCallback, useEffect, useRef } from 'preact/hooks';
 import { adjustScale } from './drawer/scale';
 import { drawCell, getGridSize } from './drawer/grid';
-import { draw, drawFromMatrix } from './drawer/draw';
+import { drawFromMatrix, drawGrid } from './drawer/draw';
 import './style.css';
 import { randomMatrixFromDims } from './matrix';
 import { getCtx } from './ctx/getter';
 
 export default function App(): VNode {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const gridRef = useRef<HTMLCanvasElement>(null);
 
   const drawRandomGrid = useCallback(() => {
     requestAnimationFrame(() => {
       const [rows, cols] = getGridSize(document);
       const matrix = randomMatrixFromDims(rows, cols);
-      draw(document);
       drawFromMatrix(document, matrix);
     });
   }, []);
 
   const resizeCanvas = useCallback(() => {
     /* istanbul ignore next */
+    if (gridRef.current) {
+      gridRef.current.width = window.innerWidth;
+      gridRef.current.height = window.innerHeight;
+      adjustScale(getCtx(document, 'grid'));
+      drawGrid(document);
+    }
+    /* istanbul ignore next */
     if (canvasRef.current) {
       canvasRef.current.width = window.innerWidth;
       canvasRef.current.height = window.innerHeight;
-      draw(document);
+      adjustScale(getCtx(document, 'canvas'));
     }
   }, []);
 
   const handleClick = useCallback((event: MouseEvent) => {
-    drawCell(document, event.offsetX, event.offsetY);
+    drawCell(getCtx(document), event.offsetX, event.offsetY);
   }, []);
 
   const handleKeyPress = useCallback(
@@ -54,18 +61,29 @@ export default function App(): VNode {
   }, [handleKeyPress, resizeCanvas]);
 
   useEffect(() => {
-    adjustScale(getCtx(document));
+    adjustScale(getCtx(document, 'canvas'));
+    adjustScale(getCtx(document, 'grid'));
+    drawGrid(document);
     drawRandomGrid();
   }, [drawRandomGrid]);
 
   return (
-    <canvas
-      ref={canvasRef}
-      id="canvas"
-      data-testid="canvas"
-      width={window.innerWidth}
-      height={window.innerHeight}
-      onClick={handleClick}
-    />
+    <div id="root">
+      <canvas
+        ref={gridRef}
+        id="grid"
+        data-testid="grid"
+        width={window.innerWidth}
+        height={window.innerHeight}
+      />
+      <canvas
+        ref={canvasRef}
+        id="canvas"
+        data-testid="canvas"
+        width={window.innerWidth}
+        height={window.innerHeight}
+        onClick={handleClick}
+      />
+    </div>
   );
 }
