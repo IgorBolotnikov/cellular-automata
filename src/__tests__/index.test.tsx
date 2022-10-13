@@ -56,20 +56,4 @@ describe('App', () => {
     });
     expect(drawCell).toHaveBeenCalled();
   });
-
-  it('should redraw grid when pressing Space button', () => {
-    void act(() => {
-      render(<App />);
-    });
-    const drawFromMatrix = jest.spyOn(drawer, 'drawFromMatrix');
-    drawFromMatrix.mockReset();
-    void act(() => {
-      fireEvent.keyPress(window, { key: '\n', code: 'Enter' });
-    });
-    expect(drawFromMatrix).not.toHaveBeenCalled();
-    void act(() => {
-      fireEvent.keyPress(window, { key: ' ', code: 'Space' });
-    });
-    expect(drawFromMatrix).toHaveBeenCalled();
-  });
 });

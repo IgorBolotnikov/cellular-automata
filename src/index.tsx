@@ -7,10 +7,12 @@ import { drawFromMatrix, drawGrid } from './drawer/draw';
 import './style.css';
 import { randomMatrixFromDims } from './matrix';
 import { getCtx } from './ctx/getter';
+import { config } from './config';
 
 export default function App(): VNode {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const gridRef = useRef<HTMLCanvasElement>(null);
+  const paused = useRef(false);
 
   const drawRandomGrid = useCallback(() => {
     requestAnimationFrame(() => {
@@ -36,6 +38,16 @@ export default function App(): VNode {
     }
   }, []);
 
+  const animate = useCallback(() => {
+    if (paused.current) {
+      return;
+    }
+    drawRandomGrid();
+    setTimeout(() => {
+      animate();
+    }, 1000 / config.fps);
+  }, [drawRandomGrid]);
+
   const handleClick = useCallback((event: MouseEvent) => {
     drawCell(getCtx(document), event.offsetX, event.offsetY);
   }, []);
@@ -46,9 +58,12 @@ export default function App(): VNode {
         return;
       }
       event.preventDefault();
-      drawRandomGrid();
+      paused.current = !paused.current;
+      if (!paused.current) {
+        animate();
+      }
     },
-    [drawRandomGrid]
+    [animate]
   );
 
   useEffect(() => {
@@ -64,8 +79,8 @@ export default function App(): VNode {
     adjustScale(getCtx(document, 'canvas'));
     adjustScale(getCtx(document, 'grid'));
     drawGrid(document);
-    drawRandomGrid();
-  }, [drawRandomGrid]);
+    animate();
+  }, [animate, drawRandomGrid]);
 
   return (
     <div id="root">
