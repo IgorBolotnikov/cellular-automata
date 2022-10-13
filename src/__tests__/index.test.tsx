@@ -38,12 +38,12 @@ describe('App', () => {
     expect(canvas.height).toEqual(200);
   });
 
-  it('should draw on canvas', () => {
-    const draw = jest.spyOn(drawer, 'draw');
+  it('should draw grid on canvas', () => {
+    const drawGrid = jest.spyOn(drawer, 'drawGrid');
     void act(() => {
       render(<App />);
     });
-    expect(draw).toHaveBeenCalled();
+    expect(drawGrid).toHaveBeenCalled();
   });
 
   it('should draw a cell when clicking on canvas', () => {
@@ -61,15 +61,15 @@ describe('App', () => {
     void act(() => {
       render(<App />);
     });
-    const draw = jest.spyOn(drawer, 'draw');
-    draw.mockReset();
+    const drawFromMatrix = jest.spyOn(drawer, 'drawFromMatrix');
+    drawFromMatrix.mockReset();
     void act(() => {
       fireEvent.keyPress(window, { key: '\n', code: 'Enter' });
     });
-    expect(draw).not.toHaveBeenCalled();
+    expect(drawFromMatrix).not.toHaveBeenCalled();
     void act(() => {
       fireEvent.keyPress(window, { key: ' ', code: 'Space' });
     });
-    expect(draw).toHaveBeenCalled();
+    expect(drawFromMatrix).toHaveBeenCalled();
   });
 });

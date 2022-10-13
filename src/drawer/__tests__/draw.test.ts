@@ -6,6 +6,7 @@ import { h } from 'preact';
 import { drawFromMatrix } from 'src/drawer/draw';
 import { getMatrixFrom2DArray } from 'src/matrix';
 import * as cell from '../grid/cell';
+import { getCtx } from 'src/ctx/getter';
 
 describe('drawFromMatrix', () => {
   beforeEach(() => {
@@ -19,7 +20,8 @@ describe('drawFromMatrix', () => {
       [0, 1],
     ]);
     drawFromMatrix(document, matrix);
-    expect(spied).toHaveBeenNthCalledWith(1, document, 0, 0);
-    expect(spied).toHaveBeenNthCalledWith(2, document, 1, 1);
+    const ctx = getCtx(document);
+    expect(spied).toHaveBeenNthCalledWith(1, ctx, 0, 0);
+    expect(spied).toHaveBeenNthCalledWith(2, ctx, 1, 1);
   });
 });

@@ -9,6 +9,8 @@ import { adjustScale } from 'src/drawer/scale';
 describe('adjustScale', () => {
   it('should adjust scale according to window DPR', () => {
     window.devicePixelRatio = 2;
+    window.innerWidth = 200;
+    window.innerHeight = 100;
     render(h('canvas', { width: 200, height: 100, id: 'canvas' }));
     const ctx = getCtx(document);
     adjustScale(ctx);
