@@ -1,4 +1,4 @@
-import { getTransitionFunction } from './transition';
+import { makeTransition } from './transition';
 import { config } from './config';
 import type { IMatrix } from './types';
 
@@ -160,6 +160,5 @@ export function randomMatrixFromDims(rows: number, cols: number): IMatrix {
  * get a next matrix based on rules of transition between them.
  */
 export function nextMatrix(matrix: IMatrix): IMatrix {
-  const fn = getTransitionFunction('GoL'); // The only rule currently available
-  return fn(matrix);
+  return makeTransition('34 Life', matrix);
 }

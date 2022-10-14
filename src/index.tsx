@@ -29,7 +29,7 @@ export default function App(): VNode {
   }, []);
 
   const resizeCanvas = useCallback(() => {
-    // /* istanbul ignore next */
+    /* istanbul ignore next */
     if (gridRef.current) {
       gridRef.current.width = window.innerWidth;
       gridRef.current.height = window.innerHeight;

@@ -1,4 +1,4 @@
-import { gameOfLife } from 'src/matrix/transition/gameOfLife';
+import { makeTransition } from 'src/matrix/transition';
 import { getMatrixFrom2DArray } from '../../matrix';
 
 describe('gameOfLife', () => {
@@ -8,7 +8,7 @@ describe('gameOfLife', () => {
       [0, 1, 0],
       [0, 0, 0],
     ]);
-    const next = gameOfLife(matrix);
+    const next = makeTransition('Game of Life', matrix);
     expect(next.isCellFilled(1, 1)).toBe(true);
   });
 
@@ -18,7 +18,7 @@ describe('gameOfLife', () => {
       [0, 1, 1],
       [0, 0, 0],
     ]);
-    const next = gameOfLife(matrix);
+    const next = makeTransition('Game of Life', matrix);
     expect(next.isCellFilled(1, 1)).toBe(true);
   });
 
@@ -28,7 +28,7 @@ describe('gameOfLife', () => {
       [0, 1, 1],
       [0, 0, 1],
     ]);
-    const next = gameOfLife(matrix);
+    const next = makeTransition('Game of Life', matrix);
     expect(next.isCellFilled(1, 1)).toBe(false);
   });
 
@@ -38,7 +38,7 @@ describe('gameOfLife', () => {
       [0, 1, 0],
       [0, 0, 0],
     ]);
-    const next = gameOfLife(matrix);
+    const next = makeTransition('Game of Life', matrix);
     expect(next.isCellFilled(1, 1)).toBe(false);
   });
 
@@ -48,7 +48,7 @@ describe('gameOfLife', () => {
       [0, 0, 1],
       [1, 0, 0],
     ]);
-    const next = gameOfLife(matrix);
+    const next = makeTransition('Game of Life', matrix);
     expect(next.isCellFilled(1, 1)).toBe(true);
   });
 });
