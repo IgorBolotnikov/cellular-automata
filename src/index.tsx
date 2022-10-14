@@ -1,29 +1,35 @@
 /** @jsx h */
-import { VNode, h } from 'preact';
+import { h, VNode } from 'preact';
 import { useCallback, useEffect, useRef } from 'preact/hooks';
-import { adjustScale } from './drawer/scale';
-import { drawCell, getGridSize } from './drawer/grid';
-import { drawFromMatrix, drawGrid } from './drawer/draw';
-import './style.css';
-import { randomMatrixFromDims } from './matrix';
-import { getCtx } from './ctx/getter';
 import { config } from './config';
+import { getCtx } from './ctx/getter';
+import { drawFromMatrix, drawGrid } from './drawer/draw';
+import { drawCell, getGridSize } from './drawer/grid';
+import { adjustScale } from './drawer/scale';
+import { IMatrix, randomMatrixFromDims } from './matrix';
+import { nextMatrix } from './matrix/matrix';
+import './style.css';
 
 export default function App(): VNode {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const gridRef = useRef<HTMLCanvasElement>(null);
   const paused = useRef(false);
+  const cachedMatrix = useRef<IMatrix>();
 
-  const drawRandomGrid = useCallback(() => {
+  const drawMatrix = useCallback(() => {
     requestAnimationFrame(() => {
-      const [rows, cols] = getGridSize(document);
-      const matrix = randomMatrixFromDims(rows, cols);
-      drawFromMatrix(document, matrix);
+      if (!cachedMatrix.current) {
+        const [rows, cols] = getGridSize(document);
+        cachedMatrix.current = randomMatrixFromDims(rows, cols);
+      } else {
+        cachedMatrix.current = nextMatrix(cachedMatrix.current);
+      }
+      drawFromMatrix(document, cachedMatrix.current);
     });
   }, []);
 
   const resizeCanvas = useCallback(() => {
-    /* istanbul ignore next */
+    // /* istanbul ignore next */
     if (gridRef.current) {
       gridRef.current.width = window.innerWidth;
       gridRef.current.height = window.innerHeight;
@@ -42,11 +48,11 @@ export default function App(): VNode {
     if (paused.current) {
       return;
     }
-    drawRandomGrid();
+    drawMatrix();
     setTimeout(() => {
       animate();
     }, 1000 / config.fps);
-  }, [drawRandomGrid]);
+  }, [drawMatrix]);
 
   const handleClick = useCallback((event: MouseEvent) => {
     drawCell(getCtx(document), event.offsetX, event.offsetY);
@@ -80,7 +86,7 @@ export default function App(): VNode {
     adjustScale(getCtx(document, 'grid'));
     drawGrid(document);
     animate();
-  }, [animate, drawRandomGrid]);
+  }, [animate, drawMatrix]);
 
   return (
     <div id="root">

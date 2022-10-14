@@ -1,3 +1,3 @@
 export const config = {
-  fps: 2,
+  fps: 10,
 };

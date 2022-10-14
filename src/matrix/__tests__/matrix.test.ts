@@ -127,8 +127,8 @@ describe('randomMatrixFromDims', () => {
   });
 });
 
-describe('getNeighborsCount', () => {
-  it('should count the number of neighbors for any cell', () => {
+describe('getNeighborsCount method', () => {
+  it('should count the number of neighbours for any cell', () => {
     const arr = [
       [0, 1, 1],
       [0, 1, 1],
@@ -138,5 +138,20 @@ describe('getNeighborsCount', () => {
     expect(matrix.getNeighborsCount(1, 1)).toEqual(4); // middle
     expect(matrix.getNeighborsCount(0, 1)).toEqual(3); // top right corner
     expect(matrix.getNeighborsCount(1, 0)).toEqual(3); // left side
+  });
+});
+
+describe('copy method', () => {
+  it('should return an exact copy of an original matrix', () => {
+    const arr = [
+      [0, 1, 1],
+      [0, 1, 1],
+      [0, 1, 0],
+    ];
+    const original = getMatrixFrom2DArray(arr);
+    const copied = original.copy();
+    expect(copied).toEqual(original);
+    original.fillCell(0, 0);
+    expect(copied.isCellFilled(0, 0)).toBe(false);
   });
 });

@@ -1,10 +1,10 @@
 export const config = {
   line: {
     width: 1,
-    color: '#b2b2b2',
+    color: '#d0d0d0',
   },
   cell: {
-    size: 20,
+    size: 10,
     color: '#000000',
   },
   backdrop: {

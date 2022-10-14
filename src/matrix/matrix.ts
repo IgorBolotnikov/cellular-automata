@@ -1,3 +1,4 @@
+import { getTransitionFunction } from './transition';
 import { config } from './config';
 import type { IMatrix } from './types';
 
@@ -76,7 +77,7 @@ class Matrix implements IMatrix {
 
   getNeighborsCount(xCoord: number, yCoord: number): number {
     let count = 0;
-    for (const [x, y] of this.neighborCoords(xCoord, yCoord)) {
+    for (const [x, y] of this.neighbourCoords(xCoord, yCoord)) {
       if (this.isCellFilled(x, y)) {
         count++;
       }
@@ -84,7 +85,11 @@ class Matrix implements IMatrix {
     return count;
   }
 
-  private *neighborCoords(
+  copy(): IMatrix {
+    return getMatrixFrom2DArray(this.matrix);
+  }
+
+  private *neighbourCoords(
     xCoord: number,
     yCoord: number
   ): Iterable<[number, number]> {
@@ -149,4 +154,12 @@ export function randomMatrixFromDims(rows: number, cols: number): IMatrix {
   const matrix = Matrix.fromDimensions(rows, cols);
   matrix.fillRandom();
   return matrix;
+}
+
+/**
+ * get a next matrix based on rules of transition between them.
+ */
+export function nextMatrix(matrix: IMatrix): IMatrix {
+  const fn = getTransitionFunction('GoL'); // The only rule currently available
+  return fn(matrix);
 }
