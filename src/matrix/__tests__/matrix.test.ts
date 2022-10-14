@@ -126,3 +126,17 @@ describe('randomMatrixFromDims', () => {
     expect(matrix1).not.toEqual(matrix2);
   });
 });
+
+describe('getNeighborsCount', () => {
+  it('should count the number of neighbors for any cell', () => {
+    const arr = [
+      [0, 1, 1],
+      [0, 1, 1],
+      [0, 1, 0],
+    ];
+    const matrix = getMatrixFrom2DArray(arr);
+    expect(matrix.getNeighborsCount(1, 1)).toEqual(4); // middle
+    expect(matrix.getNeighborsCount(0, 1)).toEqual(3); // top right corner
+    expect(matrix.getNeighborsCount(1, 0)).toEqual(3); // left side
+  });
+});

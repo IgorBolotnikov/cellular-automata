@@ -12,4 +12,6 @@ export interface IMatrix {
   fillRandom(): void;
 
   indices(): Iterable<[number, number]>;
+
+  getNeighborsCount(xCoord: number, yCoord: number): number;
 }

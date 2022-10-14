@@ -74,6 +74,31 @@ class Matrix implements IMatrix {
     }
   }
 
+  getNeighborsCount(xCoord: number, yCoord: number): number {
+    let count = 0;
+    for (const [x, y] of this.neighborCoords(xCoord, yCoord)) {
+      if (this.isCellFilled(x, y)) {
+        count++;
+      }
+    }
+    return count;
+  }
+
+  private *neighborCoords(
+    xCoord: number,
+    yCoord: number
+  ): Iterable<[number, number]> {
+    const xRange = [xCoord - 1, xCoord, xCoord + 1];
+    const yRange = [yCoord - 1, yCoord, yCoord + 1];
+    for (const x of xRange) {
+      for (const y of yRange) {
+        if (x !== xCoord || y !== yCoord) {
+          yield [x, y];
+        }
+      }
+    }
+  }
+
   private areValidCoords(xCoord: number, yCoord: number): boolean {
     try {
       return typeof this.matrix[xCoord][yCoord] === 'number';
