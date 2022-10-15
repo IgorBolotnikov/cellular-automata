@@ -5,3 +5,4 @@ dist
 coverage
 todo
 .eslintcache
+size-plugin.json
