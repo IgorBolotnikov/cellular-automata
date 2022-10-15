@@ -1,7 +1,7 @@
 {
   "name": "Cellular Automata",
   "short_name": "cellular-automata",
-  "start_url": "/",
+  "start_url": "/cellular-automata",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#fff",
