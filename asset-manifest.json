@@ -1,0 +1,15 @@
+{
+  "bundle.css": "bundle.2a647.css",
+  "bundle.js": "bundle.ee30a.esm.js",
+  "bundle.js.map": "bundle.ee30a.esm.js.map",
+  "polyfills.js": "polyfills.32e72.esm.js",
+  "polyfills.js.map": "polyfills.32e72.esm.js.map",
+  "assets/favicon.ico": "assets/favicon.ico",
+  "assets/icons/android-chrome-192x192.png": "assets/icons/android-chrome-192x192.png",
+  "assets/icons/android-chrome-512x512.png": "assets/icons/android-chrome-512x512.png",
+  "assets/icons/apple-touch-icon.png": "assets/icons/apple-touch-icon.png",
+  "assets/icons/favicon-16x16.png": "assets/icons/favicon-16x16.png",
+  "assets/icons/favicon-32x32.png": "assets/icons/favicon-32x32.png",
+  "assets/icons/mstile-150x150.png": "assets/icons/mstile-150x150.png",
+  "manifest.json": "manifest.json"
+}
