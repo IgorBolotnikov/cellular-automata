@@ -160,5 +160,5 @@ export function randomMatrixFromDims(rows: number, cols: number): IMatrix {
  * get a next matrix based on rules of transition between them.
  */
 export function nextMatrix(matrix: IMatrix): IMatrix {
-  return makeTransition('34 Life', matrix);
+  return makeTransition('Game of Life', matrix);
 }
