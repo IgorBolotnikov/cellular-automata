@@ -155,3 +155,23 @@ describe('copy method', () => {
     expect(copied.isCellFilled(0, 0)).toBe(false);
   });
 });
+
+describe('diff method', () => {
+  it('should return coords with difference in their state', () => {
+    const firstArr = [
+      [1, 0],
+      [0, 0],
+    ];
+    const first = getMatrixFrom2DArray(firstArr);
+    const secondArr = [
+      [1, 1],
+      [0, 1],
+    ];
+    const second = getMatrixFrom2DArray(secondArr);
+    const expectedDiff = [
+      [0, 1],
+      [1, 1],
+    ];
+    expect([...second.diff(first)]).toEqual(expectedDiff);
+  });
+});

@@ -1,14 +1,20 @@
-import { drawCellByIndices } from './grid/cell';
+import { clearCellByIndices, drawCellByIndices } from './grid/cell';
 import { getCtx } from '../ctx/getter';
 import { IMatrix } from '../matrix';
 import { drawGrid as _drawGrid } from './grid';
 
-export function drawFromMatrix(document: Document, matrix: IMatrix): void {
+export function drawFromMatrix(
+  document: Document,
+  next: IMatrix,
+  prev?: IMatrix
+): void {
   const ctx = getCtx(document);
-  ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-  for (const [row, col] of matrix.indices()) {
-    if (matrix.isCellFilled(row, col)) {
+  const coords = prev ? next.diff(prev) : next.indices();
+  for (const [row, col] of coords) {
+    if (next.isCellFilled(row, col)) {
       drawCellByIndices(ctx, row, col);
+    } else {
+      clearCellByIndices(ctx, row, col);
     }
   }
 }

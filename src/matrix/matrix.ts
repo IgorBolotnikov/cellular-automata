@@ -89,6 +89,14 @@ class Matrix implements IMatrix {
     return getMatrixFrom2DArray(this.matrix);
   }
 
+  *diff(from: IMatrix): Iterable<[number, number]> {
+    for (const [x, y] of from.indices()) {
+      if (this.isCellFilled(x, y) !== from.isCellFilled(x, y)) {
+        yield [x, y];
+      }
+    }
+  }
+
   private *neighbourCoords(
     xCoord: number,
     yCoord: number

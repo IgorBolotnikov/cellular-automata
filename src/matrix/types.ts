@@ -13,6 +13,8 @@ export interface IMatrix {
 
   indices(): Iterable<[number, number]>;
 
+  diff(from: IMatrix): Iterable<[number, number]>;
+
   getNeighborsCount(xCoord: number, yCoord: number): number;
 
   copy(): IMatrix;

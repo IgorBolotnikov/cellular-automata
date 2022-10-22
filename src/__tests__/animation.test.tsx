@@ -44,6 +44,7 @@ describe('canvas animation', () => {
     render(<App />);
     jest.advanceTimersByTime(1000 / config.fps / 2);
     expect(drawFromMatrixMock).toHaveBeenCalledTimes(1);
+
     fireEvent.keyPress(window, { key: ' ', code: 'Space' });
     jest.advanceTimersByTime(1000 / config.fps);
     expect(drawFromMatrixMock).toHaveBeenCalledTimes(1);

@@ -11,7 +11,7 @@
     "checks": "npm run cs:fix && npm run lint:fix",
     "build": "preact build --no-sw --no-prerender",
     "serve": "sirv build --port 8080 --cors --single",
-    "dev": "preact watch --no-sw",
+    "dev": "MODE=dev preact watch --no-sw",
     "test": "jest --coverage",
     "analyze": "preact build --analyzes",
     "publish": "npm run build && gh-pages -d build"

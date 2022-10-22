@@ -18,13 +18,15 @@ export default function App(): VNode {
 
   const drawMatrix = useCallback(() => {
     requestAnimationFrame(() => {
-      if (!cachedMatrix.current) {
-        const [rows, cols] = getGridSize(document);
-        cachedMatrix.current = randomMatrixFromDims(rows, cols);
+      let next: IMatrix;
+      if (cachedMatrix.current) {
+        next = nextMatrix(cachedMatrix.current);
       } else {
-        cachedMatrix.current = nextMatrix(cachedMatrix.current);
+        const [rows, cols] = getGridSize(document);
+        next = randomMatrixFromDims(rows, cols);
       }
-      drawFromMatrix(document, cachedMatrix.current);
+      drawFromMatrix(document, next, cachedMatrix.current);
+      cachedMatrix.current = next;
     });
   }, []);
 
