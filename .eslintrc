@@ -39,7 +39,8 @@
     "plugin:@typescript-eslint/strict"
   ],
   "ignorePatterns": [
-    "build/"
+    "build/",
+    "*.config.js"
   ],
   "settings": {
     "react": {
